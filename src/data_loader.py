@@ -179,11 +179,25 @@ def del_cols(df):
 
     return df
 
+def clean_features_for_models(features_df):
+
+    features_df= features_df[features_df['Season'] != '2018-2019']
+    ftr_mapping = {'H': 0, 'D': 1, 'A': 2}
+    features_df['FTR'] = features_df['FTR'].map(ftr_mapping)
+
+    return features_df
+
 def generate_data():
 
     download_files()
     raw_data= load_data()
     clean_data_df= clean_data(raw_data)
-    return clean_data_df
+    features_df= create_features(clean_data_df)
+    enriched_features_df= create_enriched_features(features_df, recent_matches=5)
+    features_cleaned= del_cols(enriched_features_df)
+    final_features= clean_features_for_models(features_cleaned)
 
-data= generate_data()
+    return final_features
+
+football_df= generate_data()
+print(football_df.head())

@@ -21,6 +21,19 @@ def evaluate_model(model, name):
     val_cm = confusion_matrix(y_val, val_pred)
     test_cm = confusion_matrix(y_test, test_pred)
 
+    plt.figure(figsize=(6, 5))
+    sns.heatmap(val_cm, annot=True, fmt="d", cmap="Blues",
+                xticklabels=["Home Win", "Draw", "Away Win"],
+                yticklabels=["Home Win", "Draw", "Away Win"])
+
+    plt.title(f"Confusion Matrix - {name}")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+
+    save_path = os.path.join(RESULT_PATH, f"confusion_matrix_{name}.png")
+    plt.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.close()
+
     # Print
     print("\n==============================")
     print(f"📊 Model: {name}")

@@ -5,6 +5,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+os.makedirs("results", exist_ok=True)
 RESULT_PATH= 'results'
 
 def evaluate_model(model, name):

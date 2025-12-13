@@ -1,4 +1,4 @@
-from data_loader import football_df
+from .data_loader import football_df
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import GradientBoostingClassifier

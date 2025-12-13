@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 
-OUTPUT_PATH= '../data/'
+OUTPUT_PATH= 'data/'
 RAW_PATH= os.path.join(OUTPUT_PATH, 'raw/')
 SEASONS= ["2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025"]
 

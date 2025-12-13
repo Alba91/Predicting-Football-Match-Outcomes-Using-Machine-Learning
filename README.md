@@ -1,0 +1,1 @@
+Remind to say that to get the csvs locally, we have to do python main.py at the moment

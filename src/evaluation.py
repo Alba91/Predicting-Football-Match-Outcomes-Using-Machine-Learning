@@ -1,11 +1,11 @@
-from models import random_forest, logistic_regression, gradient_boosting, knn, xgboost, X_train, y_train, X_val, y_val, X_test, y_test
+from .models import random_forest, logistic_regression, gradient_boosting, knn, xgboost, X_train, y_train, X_val, y_val, X_test, y_test
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-RESULT_PATH= '../results'
+RESULT_PATH= 'results'
 
 def evaluate_model(model, name):
 
@@ -117,9 +117,7 @@ def get_best_model(results_df):
     }
 
     print(f'🏆 Best Model: {best_model_name}')
-    print("Scores associés :", best_scores)
-
-    return best_model_name, best_scores
+    print("Scores :", best_scores)
 
 def get_rf_feature_importances():
     
@@ -130,12 +128,14 @@ def get_rf_feature_importances():
     print(feat_importances)
 
     plt.figure(figsize=(12, 6))
-    sns.barplot(x=feat_importances.values, y=feat_importances.index, palette="viridis")
+    sns.barplot(x=feat_importances.values, y=feat_importances.index, palette="viridis", hue=feat_importances.index)
     plt.title("Feature Importances - Modèle Final")
     plt.xlabel("Importance")
     plt.ylabel("Features")
     plt.savefig(os.path.join(RESULT_PATH, 'rf_feature_importances.png'))
 
-results= compare_all_models()
-get_rf_feature_importances()
-best_model_name, best_scores= get_best_model(results)
+def evaluate_models():
+
+    results= compare_all_models()
+    get_rf_feature_importances()
+    get_best_model(results)

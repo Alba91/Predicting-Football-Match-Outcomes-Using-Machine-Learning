@@ -26,7 +26,7 @@ def download_files():
         with open(filepath, "wb") as f:
             f.write(response.content)
 
-        print(f"Fichier {filename} téléchargé avec succès.")
+        print(f"Season {filename} downloaded successfully")
 
 def load_data():
 
@@ -70,6 +70,7 @@ def clean_data(data):
 
 def create_features(final_data):
 
+    final_data = final_data.copy() # Avoid warning
     final_data['Date'] = pd.to_datetime(final_data['Date'], dayfirst=True, errors='coerce')
     final_data_sorted = final_data.sort_values(['Season', 'Date']).reset_index(drop=True)
     final_data_sorted['match_id'] = final_data_sorted.index
@@ -183,6 +184,7 @@ def clean_features_for_models(features_df):
 
     features_df= features_df[features_df['Season'] != '2018-2019']
     ftr_mapping = {'H': 0, 'D': 1, 'A': 2}
+    features_df = features_df.copy() # Avoid SettingWithCopyWarning
     features_df['FTR'] = features_df['FTR'].map(ftr_mapping)
 
     return features_df
@@ -200,4 +202,3 @@ def generate_data():
     return final_features
 
 football_df= generate_data()
-print(football_df.head())

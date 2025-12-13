@@ -31,6 +31,8 @@ def find_best_random_forest():
 
     model = RandomForestClassifier(random_state=42)
 
+    print("\nSearching for best Random Forest parameters...\n")
+
     grid = GridSearchCV(
         estimator=model,
         param_grid=param_grid,
@@ -49,6 +51,7 @@ def find_best_random_forest():
     val_pred = grid.best_estimator_.predict(X_val)
     val_acc = accuracy_score(y_val, val_pred)
     print("Validation accuracy:", val_acc)
+    print("\nThese parameters will be used for the final Random Forest model.\n")
 
     return grid.best_params_
 
@@ -108,7 +111,6 @@ def final_xgboost_model():
         max_depth=4,
         learning_rate=0.1,
         eval_metric='mlogloss',
-        use_label_encoder=False,
         random_state=42
     )
 
@@ -122,4 +124,4 @@ gradient_boosting= final_gradient_boosting_model()
 knn= final_knn_model()
 xgboost= final_xgboost_model()
 
-print('Models were successfully initialized.')
+print("Models have been successfully trained and are ready for evaluation.")

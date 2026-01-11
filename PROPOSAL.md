@@ -35,7 +35,7 @@ The project will use **Python** for data processing, model training, and visuali
 
 ### **Success Criteria**
 The project will be considered successful if:
-- The model achieves **≥ 60–70% accuracy** on test data.  
+- The model achieves **≥ 50–60% accuracy** on test data.  
 - The codebase is **modular, version-controlled (Git)**, and well-documented.  
 - The results include **clear visualizations** and **interpretable feature importance**.
 
